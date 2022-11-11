@@ -26,11 +26,10 @@ app.get("/api/:date?", function (req, res) {
     ? new Date(unix).toUTCString()
     : new Date(unix).toUTCString();
 
-  try {
+  if (unix && utc) {
     res.status(201).json({ unix: unix, utc: utc });
-  } catch (error) {
-    res.status(400).json({ error: "Invalid Date" });
   }
+  res.status(400).json({ error: "Invalid Date" });
 });
 
 // listen for requests :)
